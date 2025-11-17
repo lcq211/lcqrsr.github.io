@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>全部活动 - 星光宝贝</title>
+  <style>
+    /* 全局样式（与原网站统一） */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "微软雅黑", sans-serif;
+    }
+    body {
+      background-color: #fff;
+      color: #333;
+    }
+    /* 导航栏 */
+    .nav-bar {
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #f5f5f5;
+    }
+    .logo {
+      color: #ff9933;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .nav-links a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #333;
+      font-size: 16px;
+    }
+    .nav-links a:hover {
+      color: #ff9933;
+    }
+    .help-btn {
+      background-color: #ff9933;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    /* 全部活动页面主体（淡橙色风格） */
+    .activities-page {
+      background-color: #fff3e0; /* 淡橙色背景 */
+      min-height: calc(100vh - 70px);
+      padding: 50px 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    /* 页面标题 */
+    .page-title {
+      text-align: center;
+      color: #e67e22;
+      font-size: 28px;
+      margin-bottom: 40px;
+    }
+    /* 活动列表 */
+    .activities-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    .activity-card {
+      background-color: #fff8f0; /* 浅橙色卡片背景 */
+      padding: 25px;
+      border-radius: 8px;
+      position: relative;
+    }
+    .activity-date {
+      position: absolute;
+      top: -15px;
+      left: 25px;
+      background-color: #ff9933;
+      color: #fff;
+      width: 60px;
+      height: 60px;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    .date-day {
+      font-size: 20px;
+    }
+    .date-month {
+      font-size: 14px;
+    }
+    .activity-title {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      color: #333;
+      font-size: 18px;
+    }
+    .activity-desc {
+      color: #666;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+    .activity-meta {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: #888;
+    }
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    /* 预约按钮 & 成功标记 */
+    .activity-btn {
+      width: 100%;
+      padding: 10px 0;
+      background-color: #ff9933;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .activity-btn:hover {
+      background-color: #e67e22;
+    }
+    .success-tag {
+      display: none;
+      width: 100%;
+      padding: 10px 0;
+      background-color: #28a745;
+      color: #fff;
+      border-radius: 8px;
+      font-size: 16px;
+      text-align: center;
+    }
+    /* 分页（可选） */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+    .page-btn {
+      padding: 8px 15px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: #fff;
+      cursor: pointer;
+    }
+    .page-btn.active {
+      background-color: #ff9933;
+      color: #fff;
+      border-color: #ff9933;
+    }
+  </style>
+  <!-- 图标库 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- 导航栏 -->
+  <div class="nav-bar">
+    <div class="logo">★ 星光宝贝</div>
+    <div class="nav-links">
+      <a href="index.html">首页</a>
+      <a href="#">关于唐氏</a>
+      <a href="#">资源中心</a>
+      <a href="#">成长故事</a>
+      <a href="#">社区支持</a>
+      <a href="#">联系我们</a>
+    </div>
+    <button class="help-btn">寻求帮助</button>
+  </div>
+
+  <!-- 全部活动页面主体 -->
+  <div class="activities-page">
+    <div class="container">
+      <h2 class="page-title">全部活动</h2>
+
+      <!-- 活动列表 -->
+      <div class="activities-list">
+        <!-- 活动1 -->
+        <div class="activity-card">
+          <div class="activity-date">
+            <div class="date-day">15</div>
+            <div class="date-month">六月</div>
+          </div>
+          <h3 class="activity-title">早期干预方法讲座</h3>
+          <p class="activity-desc">邀请知名康复专家讲解0-6岁儿童早期干预的关键方法和家庭训练技巧。</p>
+          <div class="activity-meta">
+            <div class="meta-item"><i class="fa-solid fa-clock"></i> 14:00-16:00</div>
+            <div class="meta-item"><i class="fa-solid fa-location-dot"></i> 线上直播</div>
+          </div>
+          <button class="activity-btn" onclick="bookActivity(this)">预约参加</button>
+          <div class="success-tag">已预约成功</div>
+        </div>
+
+        <!-- 活动2 -->
+        <div class="activity-card">
+          <div class="activity-date">
+            <div class="date-day">22</div>
+            <div class="date-month">六月</div>
+          </div>
+          <h3 class="activity-title">亲子运动会</h3>
+          <p class="activity-desc">专为特殊儿童设计的亲子运动活动，促进孩子运动能力发展，增强亲子互动。</p>
+          <div class="activity-meta">
+            <div class="meta-item"><i class="fa-solid fa-clock"></i> 09:30-11:30</div>
+            <div class="meta-item"><i class="fa-solid fa-location-dot"></i> 市儿童公园</div>
+          </div>
+          <button class="activity-btn" onclick="bookActivity(this)">预约参加</button>
+          <div class="success-tag">已预约成功</div>
+        </div>
+
+        <!-- 活动3 -->
+        <div class="activity-card">
+          <div class="activity-date">
+            <div class="date-day">28</div>
+            <div class="date-month">六月</div>
+          </div>
+          <h3 class="activity-title">家长心理支持工作坊</h3>
+          <p class="activity-desc">帮助家长缓解压力，学习情绪管理技巧，建立积极的养育心态。</p>
+          <div class="activity-meta">
+            <div class="meta-item"><i class="fa-solid fa-clock"></i> 19:00-21:00</div>
+            <div class="meta-item"><i class="fa-solid fa-location-dot"></i> 线上+线下</div>
+          </div>
+          <button class="activity-btn" onclick="bookActivity(this)">预约参加</button>
+          <div class="success-tag">已预约成功</div>
+        </div>
+
+        <!-- 新增活动4 -->
+        <div class="activity-card">
+          <div class="activity-date">
+            <div class="date-day">5</div>
+            <div class="date-month">七月</div>
+          </div>
+          <h3 class="activity-title">唐氏儿童艺术创作营</h3>
+          <p class="activity-desc">通过绘画、手工等艺术形式，激发孩子创造力，提升手眼协调能力。</p>
+          <div class="activity-meta">
+            <div class="meta-item"><i class="fa-solid fa-clock"></i> 10:00-12:00</div>
+            <div class="meta-item"><i class="fa-solid fa-location-dot"></i> 社区活动中心</div>
+          </div>
+          <button class="activity-btn" onclick="bookActivity(this)">预约参加</button>
+          <div class="success-tag">已预约成功</div>
+        </div>
+
+        <!-- 新增活动5 -->
+        <div class="activity-card">
+          <div class="activity-date">
+            <div class="date-day">12</div>
+            <div class="date-month">七月</div>
+          </div>
+          <h3 class="activity-title">家庭康复工具使用培训</h3>
+          <p class="activity-desc">讲解家庭常用康复工具的正确使用方法，提升家长居家训练效率。</p>
+          <div class="activity-meta">
+            <div class="meta-item"><i class="fa-solid fa-clock"></i> 15:00-17:00</div>
+            <div class="meta-item"><i class="fa-solid fa-location-dot"></i> 线上直播</div>
+          </div>
+          <button class="activity-btn" onclick="bookActivity(this)">预约参加</button>
+          <div class="success-tag">已预约成功</div>
+        </div>
+
+        <!-- 新增活动6 -->
+        <div class="activity-card">
+          <div class="activity-date">
+            <div class="date-day">19</div>
+            <div class="date-month">七月</div>
+          </div>
+          <h3 class="activity-title">特殊儿童社交能力提升课</h3>
+          <p class="activity-desc">通过游戏、角色扮演等形式，帮助孩子学习社交规则，提升互动能力。</p>
+          <div class="activity-meta">
+            <div class="meta-item"><i class="fa-solid fa-clock"></i> 09:30-11:30</div>
+            <div class="meta-item"><i class="fa-solid fa-location-dot"></i> 市特殊教育学校</div>
+          </div>
+          <button class="activity-btn" onclick="bookActivity(this)">预约参加</button>
+          <div class="success-tag">已预约成功</div>
+        </div>
+      </div>
+
+      <!-- 分页（可选） -->
+      <div class="pagination">
+        <button class="page-btn active">1</button>
+        <button class="page-btn">2</button>
+        <button class="page-btn">3</button>
+        <button class="page-btn"><i class="fa-solid fa-angle-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 活动预约功能（切换按钮为成功标记）
+    function bookActivity(btn) {
+      const successTag = btn.nextElementSibling;
+      btn.style.display = 'none';
+      successTag.style.display = 'block';
+      alert('活动预约成功！我们会在活动前1天提醒您~');
+    }
+  </script>
+</body>
+</html>

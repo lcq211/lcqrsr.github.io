@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>更多成长故事</title>
+  <style>
+    /* 全局样式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "微软雅黑", "Helvetica Neue", sans-serif;
+    }
+	.a1{
+		text-decoration: none;
+	}
+
+    body {
+      line-height: 1.6;
+      color: #333;
+    }
+
+    /* 故事列表页（淡橙色背景） */
+    .story-list-page {
+      background-color: #fff3e0; /* 淡橙色主背景 */
+      min-height: 100vh;
+      padding: 30px 20px;
+    }
+
+    .page-title {
+      text-align: center;
+      color: #e67e22; /* 橙色标题 */
+      margin-bottom: 40px;
+      font-size: 28px;
+      font-weight: 600;
+    }
+
+    /* 故事卡片容器 - 响应式布局 */
+    .story-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+      justify-content: center;
+      max-width: 1400px; /* 扩大最大宽度适配6个卡片 */
+      margin: 0 auto;
+      padding-bottom: 50px; /* 底部留白 */
+    }
+
+    /* 故事卡片样式 */
+    .story-card {
+      width: 100%;
+      max-width: 320px;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .story-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    }
+
+    .card-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover; /* 保持图片比例 */
+      border-bottom: 2px solid #f39c12;
+    }
+
+    .card-content {
+      padding: 20px;
+    }
+
+    .card-title {
+      color: #e67e22;
+      font-size: 20px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .card-desc {
+      color: #666;
+      font-size: 14px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3; /* 最多显示3行文字 */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    /* 故事详情页（淡橙色背景） */
+    .story-detail-page {
+      display: none; /* 初始隐藏 */
+      background-color: #fff3e0;
+      min-height: 100vh;
+      padding: 30px 20px;
+    }
+
+    .back-btn {
+      background-color: #e67e22;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .back-btn:hover {
+      background-color: #d35400;
+    }
+
+    .detail-content {
+      max-width: 800px;
+      margin: 30px auto 0;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .detail-img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 25px;
+    }
+
+    .detail-title {
+      color: #e67e22;
+      font-size: 26px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .detail-text {
+      color: #555;
+      font-size: 16px;
+      line-height: 1.8;
+      text-indent: 2em; /* 首行缩进2字符 */
+      margin-bottom: 15px;
+    }
+
+    /* 响应式适配（优化6个卡片在不同设备的显示） */
+    @media (max-width: 1200px) {
+      .story-cards {
+        max-width: 1000px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .detail-img {
+        height: 200px;
+      }
+
+      .detail-content {
+        padding: 20px;
+      }
+
+      .page-title {
+        font-size: 24px;
+      }
+
+      .card-img {
+        height: 150px;
+      }
+
+      .story-cards {
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .story-card {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 故事列表页（6个故事卡片） -->
+  <div class="story-list-page">
+	<a href="index.html" style="color: #f39c12;" class="a1">首页</a>
+    <h2 class="page-title">更多成长故事</h2>
+    <div class="story-cards">
+      <!-- 故事1 -->
+      <div class="story-card" data-id="story1">
+        <img src="img/25.jpeg" alt="小华的手工乐园" class="card-img">
+        <div class="card-content">
+          <h3 class="card-title">小华的手工乐园</h3>
+          <p class="card-desc">9岁的小华擅长折纸，他的作品曾被选为班级装饰，去年更是凭借《森林家族》获得学校创意手工奖，让我们一起看看他的手工之旅...</p>
+        </div>
+      </div>
+      <!-- 故事2 -->
+      <div class="story-card" data-id="story2">
+        <img src="img/26.jpeg" alt="小宇的音乐之路" class="card-img">
+        <div class="card-content">
+          <h3 class="card-title">小宇的音乐之路</h3>
+          <p class="card-desc">12岁的小宇学习尤克里里2年，从手指按弦疼痛到独立弹唱，校园艺术节上的表演更是赢得全场掌声，他的坚持让人感动...</p>
+        </div>
+      </div>
+      <!-- 故事3 -->
+      <div class="story-card" data-id="story3">
+        <img src="img/27.png" alt="小雨的自然探索记" class="card-img">
+        <div class="card-content">
+          <h3 class="card-title">小雨的自然探索记</h3>
+          <p class="card-desc">10岁的小雨热爱大自然，周末总爱跟着爸爸去郊外观察动植物，还制作了自己的自然笔记，记录下无数有趣的发现...</p>
+        </div>
+      </div>
+      <!-- 故事4 -->
+      <div class="story-card" data-id="story4">
+        <img src="https://picsum.photos/id/20/600/400" alt="小浩的编程启蒙" class="card-img">
+        <div class="card-content">
+          <h3 class="card-title">小浩的编程启蒙</h3>
+          <p class="card-desc">11岁的小浩偶然接触编程后便一发不可收拾，从简单的小游戏制作到参与学校编程比赛，用代码创造属于自己的世界...</p>
+        </div>
+      </div>
+      <!-- 故事5（新增） -->
+      <div class="story-card" data-id="story5">
+        <img src="img/28.jpeg" alt="小诺的校园志愿者" class="card-img">
+        <div class="card-content">
+          <h3 class="card-title">小诺的校园志愿者</h3>
+          <p class="card-desc">13岁的小诺是学校志愿者团队的核心成员，坚持服务敬老院、整理图书角，用行动传递温暖，成为同学们的榜样...</p>
+        </div>
+      </div>
+      <!-- 故事6（新增） -->
+      <div class="story-card" data-id="story6">
+        <img src="https://picsum.photos/id/65/600/400" alt="小冉的绘画追梦记" class="card-img">
+        <div class="card-content">
+          <h3 class="card-title">小冉的绘画追梦记</h3>
+          <p class="card-desc">9岁的小冉患有轻度色盲，却凭借对绘画的热爱和不懈努力，作品多次入选少儿美术展，用色彩诠释坚持的力量...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 故事详情页 -->
+  <div class="story-detail-page" id="storyDetail">
+    <button class="back-btn">← 返回故事列表</button>
+    <div class="detail-content" id="detailContent"></div>
+  </div>
+
+  <script>
+    // 所有故事的完整数据（包含6个故事）
+    const storyData = {
+      story1: {
+        title: "小华的手工乐园",
+        cover: "img/25.jpeg",
+        content: [
+          "9岁的小华从6岁开始就对折纸产生了浓厚的兴趣。第一次接触折纸是在幼儿园的手工课上，老师教大家折千纸鹤，小华看着一张普通的彩纸在自己手中变成可爱的小动物，瞬间就着了迷。",
+          "从那以后，小华就成了“折纸小达人”。他会主动找折纸教程视频学习，从简单的小船、飞机，到复杂的龙、孔雀，每一个造型他都反复练习，直到折得完美为止。有时候为了折好一个复杂的造型，他能坐在书桌前整整一下午，手指被纸张磨得发红也不放弃。",
+          "去年，学校举办“班级文化墙设计大赛”，小华决定用自己的折纸作品参赛。他花了两个星期的时间，折了几十只不同的动物，有老虎、兔子、小鸟、小鱼，组成了一幅“森林家族”的场景。当他把作品贴在班级文化墙上时，立刻吸引了所有人的目光。",
+          "最终，小华的作品不仅获得了班级第一名，还被评为学校“最佳创意手工奖”。领奖时，小华笑着说：“折纸让我学会了坚持和耐心，也让我能把脑子里的想法变成真实的小物件，这种感觉太奇妙了！”现在，小华还会教班级里的同学折纸，把这份快乐传递给更多人。"
+        ]
+      },
+      story2: {
+        title: "小宇的音乐之路",
+        cover: "img/26.jpeg",
+        content: [
+          "12岁的小宇与尤克里里的相遇，源于一次校园文化节。当时，一位高年级的学长抱着一把小巧可爱的乐器，弹唱了一首《童年》，轻快的旋律和动听的歌声深深打动了小宇。从那天起，小宇就下定决心：“我也要学会弹尤克里里！”",
+          "在小宇的再三请求下，爸爸妈妈给他买了一把尤克里里，并报了兴趣班。一开始学习并不顺利，按弦的手指总是会疼，有时候练了半天也弹不准一个音。小宇也曾想过放弃，但每当想起学长弹唱的样子，他就又鼓起了勇气。",
+          "为了提高技艺，小宇每天坚持练习1小时。放学回家做完作业，他就坐在书桌前，一遍又一遍地练习和弦、练习弹唱。手指磨出了茧子，他就贴上创可贴继续练；遇到难弹的曲子，他就把曲子分成一小段一小段，逐段攻破。",
+          "两年的坚持终于有了回报。现在的小宇已经能独立弹唱《小幸运》《稻香》《平凡之路》等十几首歌曲，弹奏技巧也越来越娴熟。今年的校园艺术节，小宇报名参加了弹唱比赛。当他抱着尤克里里，轻声弹唱《追光者》时，全场都安静了下来。",
+          "表演结束后，全场响起了雷鸣般的掌声。小宇获得了比赛的二等奖，虽然不是第一名，但他已经非常满足了。他说：“学习尤克里里的过程让我明白了，只要坚持下去，就一定能实现自己的目标。未来，我还想学习更多乐器，用音乐传递快乐。”"
+        ]
+      },
+      story3: {
+        title: "小雨的自然探索记",
+        cover: "img/27.png",
+        content: [
+          "10岁的小雨是个不折不扣的“自然爱好者”。从小，她就喜欢跟着爸爸去郊外爬山、露营，观察大自然中的一草一木、一鸟一虫。在小雨的眼里，大自然就像一个神奇的宝库，藏着无数有趣的秘密。",
+          "为了记录自己的发现，小雨特意准备了一个精致的笔记本，取名为“自然探索笔记”。每次去郊外，她都会带上笔记本和画笔，把看到的动植物画下来，再写下它们的特点和自己的感受。她的笔记本里，有五彩斑斓的蝴蝶、形态各异的树叶、活泼可爱的小松鼠，还有各种各样的花朵。",
+          "有一次，小雨在郊外发现了一只从来没见过的小虫子。它的身体是绿色的，身上带着黑色的斑点，还长着一对透明的翅膀。小雨立刻拿出笔记本，小心翼翼地把小虫子画了下来，然后回家查资料，终于知道这是一只“叶甲”。她兴奋地在笔记本上写下：“今天认识了叶甲，它是一种益虫，会吃植物的叶子，但也会帮助传播花粉。”",
+          "除了观察动植物，小雨还喜欢种植花草。她在自家的阳台上种了多肉、月季、向日葵等各种植物，每天都会给它们浇水、施肥，观察它们的生长过程。看着自己种的向日葵从一颗小小的种子长成高高的植株，最后开出金黄色的花朵，小雨心里充满了成就感。",
+          "小雨说：“大自然教会了我很多知识，也让我变得更加热爱生活。未来，我想成为一名生物学家，去探索更多大自然的秘密，保护我们的地球家园。”"
+        ]
+      },
+      story4: {
+        title: "小浩的编程启蒙",
+        cover: "https://picsum.photos/id/20/800/500",
+        content: [
+          "11岁的小浩第一次接触编程，是在小学四年级的信息技术课上。老师教大家用Scratch制作简单的小游戏，小浩一下子就被这种“用代码创造世界”的方式吸引了。他发现，只要输入几行指令，屏幕上的角色就会按照自己的想法移动、说话，这种感觉太神奇了！",
+          "课后，小浩主动向老师请教编程知识，并下载了Scratch软件，利用课余时间学习。一开始，他只能制作一些简单的小游戏，比如“打砖块”“贪吃蛇”。但随着学习的深入，他的编程水平越来越高，开始尝试制作更复杂的作品。",
+          "有一次，学校举办“编程创意大赛”，小浩决定制作一个“垃圾分类小游戏”。为了做好这个游戏，他查阅了大量的垃圾分类资料，设计了游戏规则和角色，还添加了积分系统和提示功能。在制作过程中，他遇到了很多难题，比如如何让垃圾准确地落入对应的垃圾桶，如何计算积分等。但他没有放弃，而是通过查资料、问老师、和同学讨论，一个个攻破了难题。",
+          "经过一个月的努力，小浩的“垃圾分类小游戏”终于完成了。在比赛中，他的作品因为创意新颖、操作简单、教育意义强，获得了小学组一等奖。很多同学玩了他的游戏后，都表示对垃圾分类有了更深入的了解。",
+          "现在，小浩已经开始学习Python编程，他的目标是成为一名程序员，用代码开发出更多有用、有趣的软件。他说：“编程让我学会了逻辑思考和解决问题，也让我明白了，只要有梦想，并为之努力，就一定能实现。”"
+        ]
+      },
+      // 新增故事5：小诺的校园志愿者
+      story5: {
+        title: "小诺的校园志愿者",
+        cover: "img/28.jpeg",
+        content: [
+          "13岁的小诺是六年级（3）班的学生，也是学校“阳光志愿者团队”的核心成员。从四年级加入志愿者团队至今，她已经坚持志愿服务两年多，累计服务时长超过300小时，用实际行动诠释着“奉献、友爱、互助、进步”的志愿精神。",
+          "每周六下午，小诺都会和志愿者团队的同学们一起前往社区敬老院。她们给老人们打扫房间、捶背按摩，还会表演精心准备的节目——唱歌、讲故事、朗诵诗歌。有一位独居的张奶奶，每次见到小诺都特别开心，拉着她的手说心里话。小诺总会耐心倾听，还会把自己画的画送给张奶奶，给老人带去温暖和陪伴。",
+          "在学校里，小诺也是出了名的“热心肠”。学校图书馆的图书经常摆放混乱，她主动承担起整理图书的任务，利用午休时间把图书按类别分类、编号、上架，还制作了“图书借阅指南”贴在图书馆门口，方便同学们查找。班级里的同学有困难，她也会第一时间伸出援手：帮学习困难的同学补习功课，陪生病的同学去医务室，主动分担班级的劳动任务。",
+          "去年冬天，学校组织为山区孩子捐赠衣物和书籍的活动，小诺不仅把自己的课外书和闲置衣物全部捐了出去，还动员爸爸妈妈、亲戚朋友一起参与。最终，她筹集到了50多本书和30多件衣物，全部寄给了山区的孩子们。收到山区孩子发来的感谢信时，小诺激动地说：“帮助别人的同时，自己也能收获快乐和成长。”",
+          "小诺的坚持和付出得到了老师和同学们的一致认可，她连续两年被评为学校“优秀志愿者”。面对荣誉，小诺谦虚地说：“志愿服务不是一句口号，而是日复一日的坚持。未来，我还会继续做下去，用自己的力量帮助更多需要帮助的人，让爱心传递下去。”"
+        ]
+      },
+      // 新增故事6：小冉的绘画追梦记
+      story6: {
+        title: "小冉的绘画追梦记",
+        cover: "https://picsum.photos/id/65/800/500",
+        content: [
+          "9岁的小冉从小就喜欢画画，但上帝给她开了一个小小的玩笑——她患有轻度色盲，无法准确分辨红色和绿色。医生曾告诉她的爸爸妈妈：“孩子可能不适合学画画，颜色认知会成为很大的障碍。”但小冉没有放弃，她说：“我虽然分不清某些颜色，但我能感受到世界的美好，我想用画笔把这份美好画出来。”",
+          "为了克服色盲的障碍，小冉付出了比别人更多的努力。她会把常见的颜色做成卡片，每天反复记忆；画画时，她会用标注笔在颜料盒上做好标记，避免用错颜色。一开始，她的画经常因为颜色搭配不当被同学嘲笑，但小冉没有气馁，而是更加刻苦地练习。她每天坚持画画2小时，从素描、水彩到漫画，不断尝试不同的绘画风格。",
+          "小冉的妈妈看在眼里，疼在心里，特意为她请了一位专业的美术老师。老师发现小冉虽然对部分颜色不敏感，但她的构图能力和线条感非常强，而且对光影的把握很有天赋。老师鼓励她说：“绘画的本质是表达情感和想法，颜色只是辅助手段。只要坚持下去，你一定能画出属于自己的精彩。”",
+          "在老师的指导和自己的努力下，小冉的绘画水平进步飞快。她的作品不再刻意追求“正确”的颜色，而是用独特的色彩搭配表达自己的感受。她画的《我的家乡》，用温暖的黄色和蓝色为主色调，展现了乡村的宁静和美好；她画的《梦想翅膀》，用紫色和橙色勾勒出飞翔的小鸟，充满了想象力。",
+          "去年，小冉的作品《彩虹之上》入选了全市少儿美术展。这幅画没有按照现实中的彩虹颜色绘制，而是用粉色、蓝色、黄色等颜色创造出了一道“梦幻彩虹”，赢得了评委的一致好评。获奖时，小冉激动地哭了：“我知道自己和别人不一样，但我从来没有放弃过梦想。只要坚持，就一定能实现自己的目标！”现在，小冉依然每天坚持画画，她的梦想是成为一名画家，用画笔为世界增添更多美好。"
+        ]
+      }
+    };
+
+    // 获取DOM元素
+    const storyCards = document.querySelectorAll(".story-card");
+    const storyListPage = document.querySelector(".story-list-page");
+    const storyDetailPage = document.getElementById("storyDetail");
+    const detailContent = document.getElementById("detailContent");
+    const backBtn = document.querySelector(".back-btn");
+
+    // 点击故事卡片，显示详情页
+    storyCards.forEach(card => {
+      card.addEventListener("click", () => {
+        const storyId = card.dataset.id;
+        const story = storyData[storyId];
+
+        // 拼接详情内容（多段落处理）
+        let contentHtml = `
+          <img src="${story.cover}" alt="${story.title}" class="detail-img">
+          <h3 class="detail-title">${story.title}</h3>
+        `;
+        story.content.forEach(paragraph => {
+          contentHtml += `<p class="detail-text">${paragraph}</p>`;
+        });
+
+        // 填充详情内容并切换页面
+        detailContent.innerHTML = contentHtml;
+        storyListPage.style.display = "none";
+        storyDetailPage.style.display = "block";
+      });
+    });
+
+    // 点击返回按钮，回到列表页
+    backBtn.addEventListener("click", () => {
+      storyDetailPage.style.display = "none";
+      storyListPage.style.display = "block";
+      // 滚动到顶部（优化体验）
+      window.scrollTo(0, 0);
+    });
+  </script>
+</body>
+</html>

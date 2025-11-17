@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>常见问题 - 星光宝贝</title>
+  <!-- 外部资源 -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- 自定义配置（保持原网站淡橙色风格） -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#FF9F43', // 温暖橙色
+            neutral: '#FFF9F2', // 浅暖灰背景
+            dark: '#3D3D3D',
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .faq-item {
+        transition: all 0.3s ease;
+      }
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+      .faq-item.active .faq-answer {
+        max-height: 500px;
+      }
+      .faq-item.active .faq-icon {
+        transform: rotate(180deg);
+      }
+      .search-input:focus {
+        box-shadow: 0 0 0 3px rgba(255, 159, 67, 0.2);
+      }
+    }
+  </style>
+</head>
+
+<body class="font-sans text-dark bg-neutral">
+  <!-- 导航栏（与原网站一致） -->
+  <header id="navbar" class="fixed w-full top-0 z-50 bg-white/95 shadow-sm">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <div class="flex items-center">
+          <div class="text-primary text-2xl font-bold flex items-center">
+            <i class="fa fa-star mr-2"></i>
+            <span>星光宝贝</span>
+          </div>
+        </div>
+        
+        <!-- 桌面导航 -->
+        <nav class="hidden md:flex space-x-8">
+          <a href="index.html" class="text-dark hover:text-primary font-medium transition-colors">首页</a>
+          <a href="index.html" class="text-dark hover:text-primary font-medium transition-colors">关于唐氏</a>
+          <a href="index.html" class="text-dark hover:text-primary font-medium transition-colors">资源中心</a>
+          <a href="index.html" class="text-dark hover:text-primary font-medium transition-colors">成长故事</a>
+          <a href="index.html" class="text-dark hover:text-primary font-medium transition-colors">社区支持</a>
+          <a href="index.html" class="text-dark hover:text-primary font-medium transition-colors">联系我们</a>
+        </nav>
+        
+        <!-- 帮助按钮 -->
+        <div class="hidden md:block">
+          <a href="首页.html" class="bg-primary hover:bg-primary/90 text-white px-5 py-2 rounded-full transition-all shadow-md hover:shadow-lg">
+            寻求帮助
+          </a>
+        </div>
+        
+        <!-- 移动端菜单按钮 -->
+        <button id="menuBtn" class="md:hidden text-dark focus:outline-none">
+          <i class="fa fa-bars text-xl"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- 移动端导航菜单 -->
+    <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-primary/10">
+      <div class="container mx-auto px-4 py-3 space-y-3">
+        <a href="index.html" class="block py-2 text-dark hover:text-primary">首页</a>
+        <a href="index.html" class="block py-2 text-dark hover:text-primary">关于唐氏</a>
+        <a href="index.html" class="block py-2 text-dark hover:text-primary">资源中心</a>
+        <a href="index.html" class="block py-2 text-dark hover:text-primary">成长故事</a>
+        <a href="index.html" class="block py-2 text-dark hover:text-primary">社区支持</a>
+        <a href="index.html" class="block py-2 text-dark hover:text-primary">联系我们</a>
+        <a href="index.html" class="block py-2 bg-primary text-white text-center rounded-full">寻求帮助</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 常见问题页面主体（新增搜索框） -->
+  <section class="pt-32 pb-20">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <h2 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold text-primary mb-4">常见问题</h2>
+        <p class="text-gray-600 text-lg mb-8">关于唐氏综合征的常见疑问解答，也可搜索更多问题</p>
+        
+        <!-- 新增搜索框（跳转百度搜索） -->
+        <form id="faqSearchForm" class="max-w-xl mx-auto flex">
+          <div class="relative flex-1">
+            <input 
+              type="text" 
+              id="searchQuery" 
+              placeholder="输入您的问题（例如：唐氏综合征儿童如何进行语言训练）" 
+              class="w-full px-5 py-3 rounded-l-lg border border-gray-300 focus:outline-none focus:border-primary search-input"
+              required
+            >
+            <i class="fa fa-search absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+          </div>
+          <button 
+            type="submit" 
+            class="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-r-lg transition-colors shadow-md hover:shadow-sm"
+          >
+            搜索
+          </button>
+        </form>
+        <p class="text-gray-500 text-sm mt-3">输入信息越详细,搜索结果越准确</p>
+      </div>
+      
+      <!-- 常见问题列表（可折叠） -->
+      <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-md p-8 md:p-12">
+        <div class="space-y-6">
+          <!-- 问题1 -->
+          <div class="faq-item border-b border-gray-100 pb-4">
+            <button class="flex justify-between items-center w-full text-left font-medium focus:outline-none">
+              <span>如何为唐氏综合征儿童选择合适的学校？</span>
+              <i class="fa fa-chevron-down text-primary text-sm faq-icon"></i>
+            </button>
+            <div class="faq-answer mt-3 text-gray-600">
+              <p>选择学校时需考虑：1）学校是否有特殊教育资源（如康复师、特教老师）；2）课程是否适配孩子的发展节奏；3）校园环境是否包容友好；4）是否支持个性化教育计划（IEP）。建议优先选择有特教资质的学校，或普通学校中的融合教育班级。</p>
+            </div>
+          </div>
+          
+          <!-- 问题2 -->
+          <div class="faq-item border-b border-gray-100 pb-4">
+            <button class="flex justify-between items-center w-full text-left font-medium focus:outline-none">
+              <span>早期干预的最佳时间是什么时候？</span>
+              <i class="fa fa-chevron-down text-primary text-sm faq-icon"></i>
+            </button>
+            <div class="faq-answer mt-3 text-gray-600">
+              <p>早期干预的最佳时间是<span class="font-semibold">出生后6个月内</span>（黄金期），越早期干预，孩子的能力发展潜力越大。干预内容包括感官训练、运动能力、认知发展、语言启蒙等，建议在专业康复师指导下进行家庭干预+机构干预结合。</p>
+            </div>
+          </div>
+          
+          <!-- 问题3 -->
+          <div class="faq-item border-b border-gray-100 pb-4">
+            <button class="flex justify-between items-center w-full text-left font-medium focus:outline-none">
+              <span>唐氏综合征儿童可以接种常规疫苗吗？</span>
+              <i class="fa fa-chevron-down text-primary text-sm faq-icon"></i>
+            </button>
+            <div class="faq-answer mt-3 text-gray-600">
+              <p>可以。唐氏综合征儿童并非疫苗接种的禁忌人群，建议按照国家免疫规划程序接种常规疫苗。但如果孩子存在严重心脏畸形等并发症，需在医生评估后再接种。</p>
+            </div>
+          </div>
+          
+          <!-- 问题4 -->
+          <div class="faq-item border-b border-gray-100 pb-4">
+            <button class="flex justify-between items-center w-full text-left font-medium focus:outline-none">
+              <span>有哪些政府福利政策可以申请？</span>
+              <i class="fa fa-chevron-down text-primary text-sm faq-icon"></i>
+            </button>
+            <div class="faq-answer mt-3 text-gray-600">
+              <p>常见福利包括：1）残疾儿童康复救助（每年最高2万元康复补贴）；2）特殊教育补贴；3）低保家庭额外生活补助；4）部分地区的免费医疗项目。具体政策可咨询当地残联或民政部门。</p>
+            </div>
+          </div>
+          
+          <!-- 新增问题5 -->
+          <div class="faq-item border-b border-gray-100 pb-4">
+            <button class="flex justify-between items-center w-full text-left font-medium focus:outline-none">
+              <span>唐氏综合征儿童的语言发展会比普通孩子慢吗？</span>
+              <i class="fa fa-chevron-down text-primary text-sm faq-icon"></i>
+            </button>
+            <div class="faq-answer mt-3 text-gray-600">
+              <p>多数唐氏综合征儿童的语言发展会相对迟缓，通常2-3岁开始说话，5岁左右掌握基本交流能力。通过语言训练（如口肌训练、多感官刺激），可以有效提升语言表达和理解能力。</p>
+            </div>
+          </div>
+          
+          <!-- 新增问题6 -->
+          <div class="faq-item border-b border-gray-100 pb-4">
+            <button class="flex justify-between items-center w-full text-left font-medium focus:outline-none">
+              <span>家庭如何帮助唐氏综合征儿童进行康复训练？</span>
+              <i class="fa fa-chevron-down text-primary text-sm faq-icon"></i>
+            </button>
+            <div class="faq-answer mt-3 text-gray-600">
+              <p>家庭康复可从这几点入手：1）每天进行15-30分钟的精细动作训练（如串珠子、搭积木）；2）多与孩子互动，鼓励语言表达；3）借助绘本、动画进行认知启蒙；4）遵循“小步骤、多重复”的原则，及时给予鼓励。</p>
+            </div>
+          </div>
+          
+          <!-- 新增问题7 -->
+          <div class="faq-item">
+            <button class="flex justify-between items-center w-full text-left font-medium focus:outline-none">
+              <span>唐氏综合征儿童可以正常上学和工作吗？</span>
+              <i class="fa fa-chevron-down text-primary text-sm faq-icon"></i>
+            </button>
+            <div class="faq-answer mt-3 text-gray-600">
+              <p>可以。通过早期干预和特殊教育，多数孩子能完成义务教育，部分可进入职业学校学习技能（如烘焙、手工）。成年后，在支持性环境下，可从事简单的重复性工作（如整理、包装），实现一定程度的独立生活。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚（与原网站一致） -->
+  <footer class="bg-dark text-white pt-16 pb-8">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+        <div>
+          <div class="text-white text-2xl font-bold flex items-center mb-6">
+            <i class="fa fa-star mr-2"></i>
+            <span>星光宝贝</span>
+          </div>
+          <p class="text-gray-400 mb-6">
+            我们致力于为唐氏综合征儿童及其家庭提供专业支持和资源，让每个孩子都能绽放自己的光彩。
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-weibo"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-weixin"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-youtube-play"></i>
+            </a>
+            <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-primary transition-colors">
+              <i class="fa fa-qq"></i>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-bold mb-6">快速链接</h4>
+          <ul class="space-y-3">
+            <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">首页</a></li>
+            <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">关于唐氏</a></li>
+            <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">资源中心</a></li>
+            <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">成长故事</a></li>
+            <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">社区支持</a></li>
+            <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">联系我们</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-bold mb-6">资源分类</h4>
+          <ul class="space-y-3">
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">早期干预</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">教育支持</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">医疗健康</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">家长指南</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">法律法规</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition-colors">专家咨询</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="text-lg font-bold mb-6">联系我们</h4>
+          <ul class="space-y-3">
+            <li class="flex items-start">
+              <i class="fa fa-phone text-gray-400 mt-1 mr-3"></i>
+              <span class="text-gray-400">400-123-4567</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-envelope text-gray-400 mt-1 mr-3"></i>
+              <span class="text-gray-400">contact@xingguang.org</span>
+            </li>
+            <li class="flex items-start">
+              <i class="fa fa-map-marker text-gray-400 mt-1 mr-3"></i>
+              <span class="text-gray-400">四川省成都市</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t border-white/10 pt-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-gray-400 text-sm mb-4 md:mb-0">
+            &copy; 2023 星光宝贝关爱中心 版权所有 | 
+          </p>
+          <div class="flex space-x-6">
+            <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">隐私政策</a>
+            <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">使用条款</a>
+            <a href="#" class="text-gray-400 hover:text-white text-sm transition-colors">网站地图</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 回到顶部按钮 -->
+  <button id="backToTop" class="fixed bottom-8 right-8 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg opacity-0 invisible transition-all z-50">
+    <i class="fa fa-arrow-up"></i>
+  </button>
+
+  <!-- JavaScript（新增搜索跳转功能） -->
+  <script>
+    // 导航栏滚动效果
+    const navbar = document.getElementById('navbar');
+    const backToTop = document.getElementById('backToTop');
+    
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 100) {
+        navbar.classList.add('py-2', 'shadow');
+        navbar.classList.remove('py-4');
+        backToTop.classList.remove('opacity-0', 'invisible');
+        backToTop.classList.add('opacity-100', 'visible');
+      } else {
+        navbar.classList.add('py-4');
+        navbar.classList.remove('py-2', 'shadow');
+        backToTop.classList.add('opacity-0', 'invisible');
+        backToTop.classList.remove('opacity-100', 'visible');
+      }
+    });
+    
+    // 移动端菜单
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    
+    menuBtn.addEventListener('click', function() {
+      mobileMenu.classList.toggle('hidden');
+      const icon = menuBtn.querySelector('i');
+      if (icon.classList.contains('fa-bars')) {
+        icon.classList.replace('fa-bars', 'fa-times');
+      } else {
+        icon.classList.replace('fa-times', 'fa-bars');
+      }
+    });
+    
+    // 回到顶部
+    backToTop.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // 常见问题折叠效果
+    const faqItems = document.querySelectorAll('.faq-item');
+    faqItems.forEach(item => {
+      item.querySelector('button').addEventListener('click', () => {
+        item.classList.toggle('active');
+      });
+    });
+    
+    // 新增：搜索框跳转百度功能
+    const searchForm = document.getElementById('faqSearchForm');
+    searchForm.addEventListener('submit', function(e) {
+      e.preventDefault(); // 阻止表单默认提交
+      const searchQuery = document.getElementById('searchQuery').value.trim();
+      if (searchQuery) {
+        // 拼接百度搜索URL（自动编码中文）
+        const baiduSearchUrl = `https://www.baidu.com/s?wd=${encodeURIComponent(searchQuery)}`;
+        // 跳转新窗口打开百度搜索
+        window.open(baiduSearchUrl, '_blank');
+        // 清空搜索框
+        document.getElementById('searchQuery').value = '';
+      }
+    });
+  </script>
+</body>
+</html>

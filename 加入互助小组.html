@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>加入家长互助小组 - 星光宝贝</title>
+  <style>
+    /* 全局样式（与原网站统一） */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "微软雅黑", sans-serif;
+    }
+    body {
+      background-color: #fff;
+      color: #333;
+    }
+    /* 导航栏 */
+    .nav-bar {
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #f5f5f5;
+    }
+    .logo {
+      color: #ff9933;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .nav-links a {
+      margin: 0 15px;
+      text-decoration: none;
+      color: #333;
+      font-size: 16px;
+    }
+    .nav-links a:hover {
+      color: #ff9933;
+    }
+    .help-btn {
+      background-color: #ff9933;
+      color: #fff;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    /* 加入互助小组页面主体（淡橙色风格） */
+    .join-group-page {
+      background-color: #fff3e0; /* 淡橙色背景，与网站风格统一 */
+      min-height: calc(100vh - 70px);
+      padding: 50px 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    /* 页面标题与介绍 */
+    .page-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .page-title {
+      color: #e67e22;
+      font-size: 28px;
+      margin-bottom: 15px;
+    }
+    .page-desc {
+      color: #666;
+      line-height: 1.6;
+    }
+    /* 小组优势模块 */
+    .group-advantages {
+      margin-bottom: 40px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .advantage-item {
+      width: 220px;
+      text-align: center;
+      padding: 20px;
+      background-color: #fff8f0; /* 浅橙色卡片背景 */
+      border-radius: 8px;
+    }
+    .advantage-icon {
+      font-size: 32px;
+      color: #ff9933;
+      margin-bottom: 10px;
+    }
+    .advantage-title {
+      color: #e67e22;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .advantage-text {
+      color: #666;
+      font-size: 14px;
+    }
+    /* 报名表单 */
+    .join-form .form-group {
+      margin-bottom: 25px;
+    }
+    .join-form label {
+      display: block;
+      margin-bottom: 8px;
+      color: #333;
+      font-weight: 500;
+    }
+    .join-form input,
+    .join-form select {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #333;
+    }
+    .join-form input:focus,
+    .join-form select:focus {
+      outline: none;
+      border-color: #ff9933;
+      box-shadow: 0 0 0 2px rgba(255,153,51,0.1);
+    }
+    /* 提交按钮 */
+    .submit-btn {
+      display: block;
+      width: 200px;
+      margin: 0 auto;
+      background-color: #ff9933;
+      color: #fff;
+      border: none;
+      padding: 12px 0;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .submit-btn:hover {
+      background-color: #e67e22;
+    }
+  </style>
+  <!-- 引入图标库（用于优势模块图标） -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- 导航栏（与原网站一致） -->
+  <div class="nav-bar">
+    <div class="logo">★ 星光宝贝</div>
+    <div class="nav-links">
+      <a href="index.html">首页</a>
+      <a href="#">关于唐氏</a>
+      <a href="#">资源中心</a>
+      <a href="#">成长故事</a>
+      <a href="#">社区支持</a>
+      <a href="#">联系我们</a>
+    </div>
+    <button class="help-btn">寻求帮助</button>
+  </div>
+
+  <!-- 加入互助小组页面主体 -->
+  <div class="join-group-page">
+    <div class="container">
+      <!-- 页面标题 -->
+      <div class="page-header">
+        <h2 class="page-title">加入家长互助小组</h2>
+        <p class="page-desc">我们在全国多个城市建立了家长互助小组，定期组织线下交流活动，让家长们可以相互支持、分享经验、交流心得</p>
+      </div>
+
+      <!-- 小组优势模块 -->
+      <div class="group-advantages">
+        <div class="advantage-item">
+          <div class="advantage-icon"><i class="fa-solid fa-people-group"></i></div>
+          <div class="advantage-title">线下聚会</div>
+          <div class="advantage-text">每月定期线下聚会，分享育儿经验</div>
+        </div>
+        <div class="advantage-item">
+          <div class="advantage-icon"><i class="fa-solid fa-comments"></i></div>
+          <div class="advantage-title">线上交流</div>
+          <div class="advantage-text">即时交流群，随时解答疑问</div>
+        </div>
+        <div class="advantage-item">
+          <div class="advantage-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
+          <div class="advantage-title">专业讲座</div>
+          <div class="advantage-text">邀请专业人士进行专题分享</div>
+        </div>
+        <div class="advantage-item">
+          <div class="advantage-icon"><i class="fa-solid fa-child-reaching"></i></div>
+          <div class="advantage-title">亲子活动</div>
+          <div class="advantage-text">组织亲子活动，促进孩子社交</div>
+        </div>
+      </div>
+
+      <!-- 报名表单 -->
+      <form class="join-form" onsubmit="alert('报名提交成功！我们会尽快与您联系~'); return false;">
+        <div class="form-group">
+          <label for="parent-name">您的姓名</label>
+          <input type="text" id="parent-name" placeholder="请输入您的姓名" required>
+        </div>
+        <div class="form-group">
+          <label for="child-age">孩子年龄</label>
+          <input type="number" id="child-age" min="0" placeholder="请输入孩子的年龄" required>
+        </div>
+        <div class="form-group">
+          <label for="city">所在城市</label>
+          <select id="city" required>
+            <option value="">请选择您所在的城市</option>
+            <option value="beijing">北京</option>
+            <option value="shanghai">上海</option>
+            <option value="guangzhou">广州</option>
+            <option value="shenzhen">深圳</option>
+            <option value="other">其他城市</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="phone">联系电话</label>
+          <input type="tel" id="phone" placeholder="请输入您的手机号码" required>
+        </div>
+        <div class="form-group">
+          <label for="needs">您希望获得的帮助</label>
+          <input type="text" id="needs" placeholder="例如：育儿经验分享、心理支持等">
+        </div>
+
+        <!-- 提交按钮 -->
+        <button type="submit" class="submit-btn">确认加入小组</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>

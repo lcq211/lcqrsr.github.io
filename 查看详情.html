@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>星光宝贝 - 唐氏综合征资源平台</title>
+    <style>
+        /* 基础样式重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", sans-serif;
+        }
+        body {
+            background-color: #fff8f0; /* 淡橙色背景 */
+            padding: 20px;
+        }
+        /* 导航栏样式（匹配原页面“星光宝贝”风格） */
+        .header {
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #fed7aa;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #d97706;
+            display: flex;
+            align-items: center;
+        }
+        .logo span {
+            color: #fb923c;
+            margin-right: 5px;
+        }
+        .nav {
+            display: flex;
+            gap: 30px;
+        }
+        .nav a {
+            text-decoration: none;
+            color: #4a5568;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+        .nav a:hover {
+            color: #d97706;
+        }
+        .help-btn {
+            padding: 8px 20px;
+            background-color: #fb923c;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .help-btn:hover {
+            background-color: #d97706;
+        }
+        /* 资源容器 */
+        .resource-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+        .resource-card {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(251, 146, 60, 0.1); /* 淡橙色阴影 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(251, 146, 60, 0.2); /* hover加深橙色阴影 */
+        }
+        .resource-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 15px;
+        }
+        .resource-tag {
+            display: inline-block;
+            padding: 4px 10px;
+            background-color: #fed7aa;
+            color: #d97706;
+            font-size: 12px;
+            border-radius: 12px;
+            margin-bottom: 8px;
+        }
+        .resource-title {
+            font-size: 18px;
+            color: #d97706; /* 深橙色标题 */
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        .resource-desc {
+            font-size: 14px;
+            color: #718096;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        /* 淡橙色查看详情按钮样式 */
+        .detail-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background-color: #fdba74; /* 淡橙色主色调 */
+            color: #9a3412; /* 深橙色文字（提高对比度） */
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .detail-btn:hover {
+            background-color: #fb923c; /* hover加深橙色 */
+            color: #fff; /* hover后文字变白，更醒目 */
+        }
+        .detail-btn i {
+            font-style: normal;
+        }
+        /* 查看全部资源按钮 */
+        .view-all-btn {
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
+            padding: 10px 30px;
+            background-color: transparent;
+            border: 2px solid #fb923c;
+            color: #d97706;
+            border-radius: 4px;
+            font-size: 16px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .view-all-btn:hover {
+            background-color: #fb923c;
+            color: #fff;
+        }
+        /* 详情弹窗样式 */
+        .detail-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(251, 146, 60, 0.2); /* 淡橙色半透明背景 */
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: #fff;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 8px;
+            padding: 30px;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 1px solid #fed7aa; /* 淡橙色边框 */
+        }
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            color: #fb923c; /* 橙色关闭按钮 */
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .close-modal:hover {
+            color: #d97706; /* hover加深橙色 */
+        }
+        .modal-title {
+            font-size: 22px;
+            color: #d97706; /* 深橙色弹窗标题 */
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .modal-section {
+            margin-bottom: 20px;
+        }
+        .section-title {
+            font-size: 16px;
+            color: #fb923c; /* 橙色section标题 */
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .section-content {
+            font-size: 14px;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+        /* 橙色系跳转按钮 */
+        .download-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 24px;
+            background-color: #fb923c; /* 橙色按钮 */
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+        .download-btn:hover {
+            background-color: #d97706; /* hover加深橙色 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <div class="header">
+        <div class="logo">
+            <span>★</span>星光宝贝
+        </div>
+        <div class="nav">
+            <a href="index.html">首页</a>
+            <a href="index.html">关于唐氏</a>
+            <a href="index.html">资源中心</a>
+            <a href="index.html">成长故事</a>
+            <a href="index.html">社区支持</a>
+            <a href="index.html">联系我们</a>
+        </div>
+        <button class="help-btn">寻求帮助</button>
+    </div>
+
+    <!-- 资源容器 -->
+    <div class="resource-container">
+        <!-- 原有资源1：0-3岁早期干预实用指南 -->
+        <div class="resource-card">
+            <img src="img/20.png" alt="早期干预指南">
+            <span class="resource-tag">早期干预</span>
+            <h3 class="resource-title">0-3岁早期干预实用指南</h3>
+            <p class="resource-desc">涵盖感官训练、语言启蒙、社交能力培养等核心内容，附每周可执行训练计划，帮助家长科学开展家庭干预。</p>
+            <button class="detail-btn" data-resource="guide1">
+                <i>→</i> 查看详情→获取干预训练方案
+            </button>
+        </div>
+
+        <!-- 原有资源2：特殊教育学校选择指南 -->
+        <div class="resource-card">
+            <img src="img/21.png" alt="特殊教育学校指南">
+            <span class="resource-tag">教育支持</span>
+            <h3 class="resource-title">特殊教育学校选择指南</h3>
+            <p class="resource-desc">详解学校评估维度、师资配置标准、课程设置要求，提供择校流程清单和家长避坑指南。</p>
+            <button class="detail-btn" data-resource="guide2">
+                <i>→</i> 查看详情→查看机构评估标准
+            </button>
+        </div>
+
+        <!-- 原有资源3：唐氏综合征健康管理手册 -->
+        <div class="resource-card">
+            <img src="img/22.png" alt="健康管理手册">
+            <span class="resource-tag">医疗健康</span>
+            <h3 class="resource-title">唐氏综合征健康管理手册</h3>
+            <p class="resource-desc">包含生长发育监测、常见疾病预防、营养膳食建议，由儿科专家联合编写的权威医学指南。</p>
+            <button class="detail-btn" data-resource="guide3">
+                <i>→</i> 查看详情→下载医学建议手册
+            </button>
+        </div>
+
+        <!-- 新增资源1：家长心理调适与情绪管理 -->
+        <div class="resource-card">
+            <img src="img/23.png" alt="家长心理调适">
+            <span class="resource-tag">家长指南</span>
+            <h3 class="resource-title">家长心理调适与情绪管理</h3>
+            <p class="resource-desc">帮助家长应对压力与情绪波动，建立积极心态，更好地支持孩子成长。</p>
+            <button class="detail-btn" data-resource="guide4">
+                <i>→</i> 查看详情→获取心理调适方法
+            </button>
+        </div>
+
+        <!-- 新增资源2：居家康复训练视频课程 -->
+        <div class="resource-card">
+            <img src="img/24.png" alt="居家康复训练">
+            <span class="resource-tag">早期干预</span>
+            <h3 class="resource-title">居家康复训练视频课程</h3>
+            <p class="resource-desc">由专业康复师录制的系列视频，包含大运动、精细动作等训练方法。</p>
+            <button class="detail-btn" data-resource="guide5">
+                <i>→</i> 查看详情→观看训练视频
+            </button>
+        </div>
+
+        <!-- 新增资源3：社交技能培养活动手册 -->
+        <div class="resource-card">
+            <img src="img/25.png" alt="社交技能培养">
+            <span class="resource-tag">教育支持</span>
+            <h3 class="resource-title">社交技能培养活动手册</h3>
+            <p class="resource-desc">帮助孩子发展社交能力的实用活动设计，适合家庭和学校使用。</p>
+            <button class="detail-btn" data-resource="guide6">
+                <i>→</i> 查看详情→获取活动方案
+            </button>
+        </div>
+    </div>
+
+    <!-- 查看全部资源按钮 -->
+    <a href="#" class="view-all-btn">查看全部资源</a>
+
+    <!-- 详情弹窗 -->
+    <div class="detail-modal" id="detailModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2 class="modal-title" id="modalTitle"></h2>
+            <div class="modal-section">
+                <h4 class="section-title">核心内容模块</h4>
+                <div class="section-content" id="moduleContent"></div>
+            </div>
+            <div class="modal-section">
+                <h4 class="section-title">家长反馈</h4>
+                <div class="section-content" id="feedbackContent"></div>
+            </div>
+            <a href="#" class="download-btn" id="downloadBtn" target="_blank">查看更多权威资源</a>
+        </div>
+    </div>
+
+    <script>
+        // 资源数据：包含原有+新增资源
+        const resourceData = {
+            guide1: {
+                title: "0-3岁早期干预实用指南",
+                module: `
+                    <ul>
+                        <li>感官训练：触觉、视觉、听觉刺激游戏（10个实操案例）</li>
+                        <li>语言启蒙：从发音到短句的阶梯式训练方法</li>
+                        <li>社交能力：家庭互动游戏提升沟通意愿</li>
+                        <li>每周训练计划表：可打印版，按年龄分段设计</li>
+                    </ul>
+                `,
+                feedback: "使用了2个月，宝宝的反应速度明显提升，训练计划很贴合日常带娃场景，不用额外花太多时间。—— 家长王女士",
+                downloadUrl: "https://www.baidu.com/s?wd=0-3岁儿童早期干预+权威资源&tn=02003390_42_hao_pg"
+            },
+            guide2: {
+                title: "特殊教育学校选择指南",
+                module: `
+                    <ul>
+                        <li>评估维度：师资配比、设施条件、课程体系、家校沟通机制</li>
+                        <li>择校流程：咨询→参观→测评→申请→录取全流程解析</li>
+                        <li>避坑指南：常见择校误区及应对方法</li>
+                        <li>机构对比表：全国30+重点特殊教育学校参数汇总</li>
+                    </ul>
+                `,
+                feedback: "按照指南的评估标准去考察学校，避开了很多隐形问题，最终选的学校很适合孩子的需求。—— 家长李先生",
+                downloadUrl: "https://www.baidu.com/s?wd=特殊教育学校+选择指南+官方&tn=02003390_42_hao_pg"
+            },
+            guide3: {
+                title: "唐氏综合征健康管理手册",
+                module: `
+                    <ul>
+                        <li>生长发育监测：身高、体重、智力发育里程碑参考</li>
+                        <li>常见疾病预防：心脏、听力、视力问题的筛查与护理</li>
+                        <li>营养膳食：针对性饮食方案，促进骨骼和大脑发育</li>
+                        <li>康复训练：家庭可操作的肢体协调与认知训练方法</li>
+                    </ul>
+                `,
+                feedback: "手册里的医学建议很专业，跟医生的指导一致，还附带了饮食食谱，照顾孩子更有方向了。—— 家长张女士",
+                downloadUrl: "https://www.baidu.com/s?wd=唐氏综合征+权威资源+医学指南&tn=02003390_42_hao_pg"
+            },
+            // 新增资源4：家长心理调适与情绪管理
+            guide4: {
+                title: "家长心理调适与情绪管理",
+                module: `
+                    <ul>
+                        <li>压力识别：常见情绪困扰的信号与自我评估方法</li>
+                        <li>调节技巧：呼吸放松、正念冥想等5种居家可操作方法</li>
+                        <li>支持系统：如何构建家庭/社区的情绪支持网络</li>
+                        <li>案例分享：不同阶段家长的情绪调适经验</li>
+                    </ul>
+                `,
+                feedback: "之前经常陷入焦虑，跟着指南里的方法调整后，心态平稳了很多，和孩子的互动也更耐心了。—— 家长刘女士",
+                downloadUrl: "https://www.baidu.com/s?wd=特殊儿童家长心理调适+权威指南&tn=02003390_42_hao_pg"
+            },
+            // 新增资源5：居家康复训练视频课程
+            guide5: {
+                title: "居家康复训练视频课程",
+                module: `
+                    <ul>
+                        <li>大运动训练：抬头、翻身、爬行等动作的分步教学</li>
+                        <li>精细动作：抓握、串珠、涂鸦等手部协调训练</li>
+                        <li>课程安排：每周3次，每次20分钟的轻量化训练计划</li>
+                        <li>注意事项：不同发育阶段的训练安全要点</li>
+                    </ul>
+                `,
+                feedback: "视频讲解很细致，跟着做了1个月，孩子的爬行能力进步明显，不用总跑康复中心了。—— 家长陈先生",
+                downloadUrl: "https://www.baidu.com/s?wd=唐氏综合征居家康复训练+视频课程&tn=02003390_42_hao_pg"
+            },
+            // 新增资源6：社交技能培养活动手册
+            guide6: {
+                title: "社交技能培养活动手册",
+                module: `
+                    <ul>
+                        <li>基础互动：眼神交流、分享行为的游戏设计</li>
+                        <li>同伴交往：家庭/幼儿园场景下的社交活动案例</li>
+                        <li>情绪识别：帮助孩子理解自己与他人情绪的工具</li>
+                        <li>活动道具：低成本、易制作的家庭社交游戏材料</li>
+                    </ul>
+                `,
+                feedback: "手册里的活动很有趣，孩子愿意参与，现在能主动和小朋友打招呼了。—— 家长周女士",
+                downloadUrl: "https://www.baidu.com/s?wd=特殊儿童社交技能培养+活动方案&tn=02003390_42_hao_pg"
+            }
+        };
+
+        // 获取DOM元素
+        const detailBtns = document.querySelectorAll(".detail-btn");
+        const detailModal = document.getElementById("detailModal");
+        const closeModal = document.getElementById("closeModal");
+        const modalTitle = document.getElementById("modalTitle");
+        const moduleContent = document.getElementById("moduleContent");
+        const feedbackContent = document.getElementById("feedbackContent");
+        const downloadBtn = document.getElementById("downloadBtn");
+
+        // 点击查看详情按钮
+        detailBtns.forEach(btn => {
+            btn.addEventListener("click", function() {
+                const resourceKey = this.getAttribute("data-resource");
+                const resource = resourceData[resourceKey];
+                
+                // 填充弹窗内容
+                modalTitle.textContent = resource.title;
+                moduleContent.innerHTML = resource.module;
+                feedbackContent.textContent = resource.feedback;
+                downloadBtn.href = resource.downloadUrl;
+                
+                // 显示弹窗
+                detailModal.style.display = "flex";
+            });
+        });
+
+        // 关闭弹窗
+        closeModal.addEventListener("click", function() {
+            detailModal.style.display = "none";
+        });
+
+        // 点击弹窗外部关闭
+        detailModal.addEventListener("click", function(e) {
+            if (e.target === detailModal) {
+                detailModal.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>
