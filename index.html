@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>星光宝贝 - 唐氏综合征儿童关爱中心</title>
-  <!-- 外部资源（优先加载图标+Chart.js，确保顺序正确） -->
+  <!-- 外部资源：优先加载Font Awesome + 简化Chart.js链接（去掉integrity避免加载失败） -->
   <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js" integrity="sha256-aa0xaJgmK/X7pDUBdvoPTkcBCJn6c6sBbqF5agXQ6kl" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
   
   <!-- 自定义配置 - 温暖色调调整 -->
@@ -122,7 +122,6 @@
           <div class="relative">
             <div class="absolute -top-4 -left-4 w-24 h-24 bg-secondary/20 rounded-full"></div>
             <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-primary/20 rounded-full"></div>
-            <!-- 修复：确保图片路径与仓库结构一致（仓库中需有img文件夹+19.jpeg） -->
             <img src="img/19.jpeg" alt="唐氏综合征儿童与家长温馨互动" class="w-full h-auto rounded-2xl shadow-xl relative z-10">
           </div>
         </div>
@@ -132,7 +131,6 @@
       <div class="mt-20">
         <p class="text-center text-gray-500 mb-6 ">受到专业机构认可与支持</p>
         <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70">
-          <!-- 修复：确保图片路径与仓库结构一致（img文件夹+2.png/3.png/4.png/5.png） -->
           <div class="h-40 md:h-42"><img src="img/2.png" alt="合作机构" class="h-full w-auto"></div>
           <div class="h-40 md:h-42"><img src="img/3.png" alt="合作机构" class="h-full w-auto"></div>
           <div class="h-40 md:h-42"><img src="img/4.png" alt="合作机构" class="h-full w-auto"></div>
@@ -153,7 +151,6 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="bg-neutral rounded-xl p-8 shadow-sm card-hover">
           <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-6">
-            <!-- 保留Font Awesome图标，确保CDN加载正常 -->
             <i class="fa fa-info text-primary text-2xl"></i>
           </div>
           <h3 class="text-xl font-bold mb-3">基本认知</h3>
@@ -183,13 +180,13 @@
         </div>
       </div>
       
-      <!-- 数据统计 -->
+      <!-- 数据统计（修复Chart.js：增加容器宽高+优化渲染逻辑） -->
       <div class="mt-20 bg-neutral rounded-2xl p-8 md:p-12">
         <h3 class="text-2xl font-bold mb-8 text-center">唐氏综合征相关数据</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div class="min-h-[300px]">
-            <!-- 保留Canvas容器，修复Chart.js渲染时机 -->
-            <canvas id="prevalenceChart" width="400" height="300"></canvas>
+          <!-- 修复：给Canvas容器设置固定高度+宽度，确保Chart.js渲染空间 -->
+          <div class="w-full h-[300px]">
+            <canvas id="prevalenceChart" class="w-full h-full"></canvas>
           </div>
           <div class="flex flex-col justify-center">
             <div class="space-y-6">
@@ -939,72 +936,59 @@
       });
     });
     
-    // 修复：将Chart.js渲染代码包裹在DOMContentLoaded事件中，确保元素加载完成后执行
+    // 修复Chart.js渲染：确保DOM加载完成+容器存在
     document.addEventListener('DOMContentLoaded', function() {
-      // 发病率图表 - 使用温暖色调
-      const ctx = document.getElementById('prevalenceChart').getContext('2d');
-      const prevalenceChart = new Chart(ctx, {
+      const chartEl = document.getElementById('prevalenceChart');
+      if (!chartEl) return; // 容器不存在则不执行
+      
+      // 初始化图表（保留交互效果）
+      new Chart(chartEl, {
         type: 'bar',
         data: {
           labels: ['20岁', '25岁', '30岁', '35岁', '40岁', '45岁'],
           datasets: [{
             label: '每1000名新生儿中的唐氏综合征发生率',
             data: [1.1, 1.2, 1.5, 4.5, 10, 25],
-            backgroundColor: [
-              'rgba(255, 159, 67, 0.6)',
-              'rgba(255, 159, 67, 0.6)',
-              'rgba(255, 159, 67, 0.6)',
-              'rgba(255, 159, 67, 0.6)',
-              'rgba(255, 159, 67, 0.6)',
-              'rgba(255, 159, 67, 0.6)'
-            ],
-            borderColor: [
-              'rgba(255, 159, 67, 1)',
-              'rgba(255, 159, 67, 1)',
-              'rgba(255, 159, 67, 1)',
-              'rgba(255, 159, 67, 1)',
-              'rgba(255, 159, 67, 1)',
-              'rgba(255, 159, 67, 1)'
-            ],
-            borderWidth: 1
+            backgroundColor: 'rgba(255, 159, 67, 0.6)',
+            borderColor: 'rgba(255, 159, 67, 1)',
+            borderWidth: 1,
+            hoverBackgroundColor: 'rgba(255, 159, 67, 0.8)'
           }]
         },
         options: {
           responsive: true,
+          maintainAspectRatio: false, // 跟随容器宽高
           scales: {
             y: {
               beginAtZero: true,
-              title: {
-                display: true,
-                text: '发生率 (每1000名新生儿)'
-              }
+              title: { display: true, text: '发生率 (每1000名新生儿)' }
             },
             x: {
-              title: {
-                display: true,
-                text: '母亲年龄'
-              }
+              title: { display: true, text: '母亲年龄' }
+            }
+          },
+          plugins: {
+            tooltip: {
+              enabled: true // 保留悬停提示
             }
           }
         }
       });
     });
 
-    // 1. 活动预约成功提示
+    // 活动预约成功提示
     function showBookSuccess() {
       alert('预约参加成功！我们会在活动前1天通过短信提醒您~');
     }
 
-    // 2. 提交留言成功提示
+    // 提交留言成功提示
     function submitMessage() {
-      // 重置表单
       document.querySelector('#contact form').reset();
       alert('留言提交成功！我们会在24小时内与您联系~');
     }
 
-    // 3. 订阅资讯成功提示
+    // 订阅资讯成功提示
     function subscribeNewsletter() {
-      // 重置订阅输入框
       document.getElementById('newsletterEmail').value = '';
       alert('订阅资讯成功！我们会定期向您推送最新内容~');
     }
